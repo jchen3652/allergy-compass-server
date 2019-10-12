@@ -44,11 +44,20 @@ def preferenceUpdate(request):
     if request.method == 'POST':
         data = json.loads(request.body)
         name = data['name']
+        dairy = data['Dairy']
+        soy = data['Soy']
+        seafood = data['Seafood']
+        nuts = data['Nuts']
         doc_ref = dataBase.collection('users').document(name)
         doc_ref.set({
-            data
+            'name':name,
+            'Dairy':dairy,
+            'Soy':soy,
+            'Seafood':seafood,
+            'Nuts':nuts
+
         })
-    return request
+    return JsonResponse(data)
 
 
 
@@ -64,7 +73,7 @@ def addUser(request):
             'name': name,
             'password': password,
         })
-    return request
+    return JsonResponse(data)
 
 
 @csrf_exempt
