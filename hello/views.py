@@ -45,21 +45,31 @@ def images(request):
     elif request.method == 'GET':
         return render(request, "imageView.html")
 
-def imageURLToFoodID(url):
+
+
+def get_similar_products_uri(
+        project_id, location, product_set_id, product_category,
+        image_uri, filter):
     """Search similar products to image.
     Args:
-        url
+        project_id: Id of the project.
+        location: A compute region name.
+        product_set_id: Id of the product set.
+        product_category: Category of the product.
+        file_path: Local file path of the image to be searched.
+        filter: Condition to be applied on the labels.
+        Example for filter: (color = red OR color = blue) AND style = kids
+        It will search on all products with the following labels:
+        color:red AND style:kids
+        color:blue AND style:kids
     """
     # product_search_client is needed only for its helper methods.
     product_search_client = vision.ProductSearchClient()
     image_annotator_client = vision.ImageAnnotatorClient()
 
-    #TODO: this may be incorrect for network stuff
-    with open(url, 'rb') as image_file:
-        content = image_file.read()
-
     # Create annotate image request along with product search feature.
-    image = vision.types.Image(content=content)
+    image_source = vision.types.ImageSource(image_uri=image_uri)
+    image = vision.types.Image(source=image_source)
 
     # product search specific parameters
     product_set_path = product_search_client.product_set_path(
@@ -79,3 +89,40 @@ def imageURLToFoodID(url):
     results = response.product_search_results.results
 
     return results[0].product.name
+
+def imageURLToFoodID(url):
+    """Search similar products to image.
+    Args:
+        url
+    """
+    # # product_search_client is needed only for its helper methods.
+    # product_search_client = vision.ProductSearchClient()
+    # image_annotator_client = vision.ImageAnnotatorClient()
+    #
+    # #TODO: this may be incorrect for network stuff
+    # with open(url, 'rb') as image_file:
+    #     content = image_file.read()
+    #
+    # # Create annotate image request along with product search feature.
+    # image = vision.types.Image(content=content)
+    #
+    # # product search specific parameters
+    # product_set_path = product_search_client.product_set_path(
+    #     project=project_id, location=location,
+    #     product_set=product_set_id)
+    # product_search_params = vision.types.ProductSearchParams(
+    #     product_set=product_set_path,
+    #     product_categories=[product_category],
+    #     filter=filter)
+    # image_context = vision.types.ImageContext(
+    #     product_search_params=product_search_params)
+    #
+    # # Search products similar to the image.
+    # response = image_annotator_client.product_search(
+    #     image, image_context=image_context)
+    #
+    # results = response.product_search_results.results
+    #
+    # return results[0].product.name
+
+    return get_similar_products_uri("allergy-compass", "us-east1", "product_set0", "packagedgoods-v1", url, "style=nothing")
