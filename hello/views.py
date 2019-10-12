@@ -49,10 +49,10 @@ def addUser(request):
         data = json.loads(request.body)
         name = data['name']
         password = data['password']
-        doc_ref = dataBase.collection(u'users').document(unicode(name))
+        doc_ref = dataBase.collection(u'users').document(str(name, 'utf-8'))
         doc_ref.set({
-            u'name': unicode(name),
-            u'password': unicode(password),
+            u'name': str(name, 'utf-8'),
+            u'password': str(password, 'utf-8'),
         })
 
 
