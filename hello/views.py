@@ -52,7 +52,7 @@ def addUser(request):
         u'password': unicode(password),
     })
     print("Request body: ", request.body)
-    if request.method == 'POST:'
+    if request.method == 'POST':
         data = json.loads(request.body)
         name = data['name']
         password = data['password']
