@@ -37,7 +37,7 @@ def requests(request):
 @csrf_exempt
 def images(request):
     if request.method == 'POST':
-        data = json.loads(request.data)
+        data = json.loads(request.body)
         url = data['image_url']
 
 
