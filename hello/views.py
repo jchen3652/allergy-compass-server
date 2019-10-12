@@ -4,6 +4,8 @@ from django.views.decorators.csrf import csrf_exempt
 
 import base64
 import json
+import shutil
+import requests
 from google.cloud import vision
 from .models import Greeting
 
@@ -44,6 +46,61 @@ def images(request):
         return HttpResponse(imageURLToFoodID(url))
     elif request.method == 'GET':
         return render(request, "imageView.html")
+
+
+
+def get_similar_products_file(
+        project_id, location, product_set_id, product_category,
+        file_path, filter):
+    """Search similar products to image.
+    Args:
+        project_id: Id of the project.
+        location: A compute region name.
+        product_set_id: Id of the product set.
+        product_category: Category of the product.
+        file_path: Local file path of the image to be searched.
+        filter: Condition to be applied on the labels.
+        Example for filter: (color = red OR color = blue) AND style = kids
+        It will search on all products with the following labels:
+        color:red AND style:kids
+        color:blue AND style:kids
+    """
+    # product_search_client is needed only for its helper methods.
+    product_search_client = vision.ProductSearchClient()
+    image_annotator_client = vision.ImageAnnotatorClient()
+
+    # Read the image as a stream of bytes.
+    with open(file_path, 'rb') as image_file:
+        content = image_file.read()
+
+    # Create annotate image request along with product search feature.
+    image = vision.types.Image(content=content)
+
+    # product search specific parameters
+    product_set_path = product_search_client.product_set_path(
+        project=project_id, location=location,
+        product_set=product_set_id)
+    product_search_params = vision.types.ProductSearchParams(
+        product_set=product_set_path,
+        product_categories=[product_category],
+        filter=filter)
+    image_context = vision.types.ImageContext(
+        product_search_params=product_search_params)
+
+    # Search products similar to the image.
+    response = image_annotator_client.product_search(
+        image, image_context=image_context)
+
+    # print(response)
+
+    index_time = response.product_search_results.index_time
+    print('Product set index time:')
+    print('  seconds: {}'.format(index_time.seconds))
+    print('  nanos: {}\n'.format(index_time.nanos))
+
+    results = response.product_search_results.
+
+    return results[0].product.name
 
 
 
@@ -92,11 +149,30 @@ def get_similar_products_uri(
 
     return results[0].product.name
 
+
+
+
 def imageURLToFoodID(url):
     """Search similar products to image.
     Args:
         url
     """
+
+
+    # This is the image url.
+
+    # Open the url image, set stream to True, this will return the stream content.
+    resp = requests.get(url, stream=True)
+    # Open a local file with wb ( write binary ) permission.
+    local_file = open('temp.jpg', 'wb')
+    # Set decode_content value to True, otherwise the downloaded image file's size will be zero.
+    resp.raw.decode_content = True
+    # Copy the response stream raw data to local image file.
+    shutil.copyfileobj(resp.raw, local_file)
+    # Remove the image url response object.
+    del resp
+
+
     # # product_search_client is needed only for its helper methods.
     # product_search_client = vision.ProductSearchClient()
     # image_annotator_client = vision.ImageAnnotatorClient()
@@ -127,4 +203,4 @@ def imageURLToFoodID(url):
     #
     # return results[0].product.name
 
-    return get_similar_products_uri("allergy-compass", "us-east1", "product_set0", "packagedgoods-v1", url, "style=nothing")
+    return get_similar_products_file("allergy-compass", "us-east1", "product_set0", "packagedgoods-v1", 'temp.jpg', "style=nothing")
