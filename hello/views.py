@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
 import base64
+import json
 from google.cloud import vision
 from .models import Greeting
 
@@ -36,7 +37,10 @@ def requests(request):
 @csrf_exempt
 def images(request):
     if request.method == 'POST':
-        url = request.body['image_url']
+        data = json.loads(request.data)
+        url = data['image_url']
+
+
         return HttpResponse(imageURLToFoodID(url))
     elif request.method == 'GET':
         return render(request, "imageView.html")
