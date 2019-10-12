@@ -28,6 +28,8 @@ def db(request):
 
 @csrf_exempt
 def images(request):
+    print("Request body:",request.body)
+
     if request.method == 'POST':
         data = json.loads(request.body)
         url = data['image_url']
