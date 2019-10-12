@@ -19,4 +19,6 @@ urlpatterns = [
     path("db/", hello.views.db, name="db"),
     path("admin/", admin.site.urls),
     path("images", hello.views.images, name = "images")
+    path("preferenceUpdate", hello.views.preferenceUpdate, name = "preferenceUpdate")
+    path("addUser", hello.views.addUser, name = "addUser")
 ]

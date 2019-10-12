@@ -9,6 +9,18 @@ import requests
 from google.cloud import vision
 from .models import Greeting
 
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import firestore
+
+# Use the application default credentials
+cred = credentials.ApplicationDefault()
+firebase_admin.initialize_app(cred, {
+  'projectId': 'allergy-compass',
+})
+
+dataBase = firestore.client()
+
 # Create your views here.
 @csrf_exempt
 def index(request):
@@ -26,6 +38,23 @@ def db(request):
 
     return render(request, "db.html", {"greetings": greetings})
 
+@csrf_exempt
+def preferenceUpdate(request):
+    print("Request body: ", request.body)
+
+@csrf_exempt
+def addUser(request):
+    print("Request body: ", request.body)
+    if request.method == 'POST:'
+        data = json.loads(request.body)
+        name = data['name']
+        password = data['password']
+        doc_ref = dataBase.collection(u'users').document(unicode(name))
+        doc_ref.set({
+            u'name': unicode(name),
+            u'password': unicode(password),
+        })
+        
 
 @csrf_exempt
 def images(request):
