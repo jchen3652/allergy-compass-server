@@ -70,11 +70,13 @@ def login(request):
         try:
             doc = doc_ref.get()
             if (doc.to_dict()['password']==password):
+                print("good")
                 response["good"] = "good"
             else:
                 response["good"] = "bad"
         except google.cloud.exceptions.NotFound:
             response["good"] = "no doc"
+    print(response)
     return JsonResponse(response)
 
 
