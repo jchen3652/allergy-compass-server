@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "allergy-compass",
+  "private_key_id": "35071c1223e29f829f5d0e51ceec0c9b50a61405",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDEJP6QPkDMlJJr\njwvohaGhmxvSJC4xYiKvcAuCuxjOR4kokexdtG+YXhlN7dU2KyNkiaBsZAeh/Ple\n4FjDlBHixC5GoulAoqAZrqKzujK7CijO5xEPcHNGIH+3wdP/i3EDiB2Qeb4K5SUo\nAs3uJJGxzUIlH5eHN6bUxtCjZbnGdFCGcp4ZSyLN8vdHSICfUmz62aQsFmqQ6u9x\nHTknsBn4D+neNOBrmMtifxOMxsLX8a+SOOFQI3VnSVR2YAmLZ0IZU3NBSHmwxfy5\nPFjvqFiohHJ3sxJJ2uvVq0OuKUUNooqv7EE3FjE3E69A42+lYCAwOMLUf/D4tI9q\nndacmS2lAgMBAAECggEAGF/Agow54TJVP6h3Al4Yx8xOmL6GPvzC8qopxAUcAAZD\ntRbtGHfjpjuLSXPUmvahX0z68n07tZWKJ5AZd7RexJ88YOq9sZqD6q0Y6tyokTWh\n/JQaOqDusjg3ps4fWhIp6RZxFhMK2q++/kna7Uz+DepD3fkfC16PDMHoC2YIv/Bc\noBM71LzdeT3ucZW/RM6ISzDdmWSjumitT98ysK34CcnncHQKYVfDdxET6K7hiO/s\noMLMuCVJF7Ce4avVHJZMZU2g/pWmv0YreKWSF58sDpn0KHYhXyK2MmyChxYTRl8O\nsJAanjATPJQORU4xjTAWquMzpoMWTcoFIXCcqazWAQKBgQDgb0FJmAb+LmdwqjN9\nRo7DmM6uG1OJ1TLfrAG8zQRs5IuuzSG7hmjmh4F12PPl7IjRjVveQpyLLfjqCPaW\nZGzfL8Fz3b64d8GnFdA9hR6Q7aJ5pEIk2HrTYQiJq/NpwSsgXyCub9Vn/obfIH7P\nJuRY81p2AWXh/gx7W8ln73wVyQKBgQDfuyhn3op8cmyavyaW4aKO7JF5g92f4g5T\nZij8G0dQywf21+GDyHOkAxVpl5IqIK0X1ht04LOjZ0eouIRlTtrr2iqyDdQF+LyU\nCn5g6T24NWmuUFn8XaHQX21CMbhMEg0iZ/f78qxfNEwYQbLfATK60m+ynhSgTaHz\nglO80AV2/QKBgBQnSWiPY0ld52IBlqAQPu+ngB+4SncdEvVs37cRfe09VKG8v+Oz\n/SV+U4y+j6A87khK9k3uE1qYJTr21RXKLNCZ3DhIWED+WABmAA4WLxl6jVV4/4uJ\nePYUR4z9SN1dQD8m66teVX6CJ6BPrbNyXZzzNVNVas2xX3OQWXSg17apAoGAH6Al\nJgmfKdhC4d0DZ3CdufZW2gZ53Y/m1oMqZ/izLAiHJ618g1RihFyrOjHix3G3BheN\n6geZXQ/MYV0z2d47s/sy7dhmkDGI9qRFGQ3fW5qxRaK2FaZmqT3UA/djRd2HXcW0\nmDjFhO+vkf43eq6ArUfx4h3WbJKMwg86JwaAv0ECgYAitqQgEt+EvJct3ZwFLd0r\nIyCzBar1hGqZrtaFpMKZsZyrE2H1oduM0d6EQm8XUGqtQuJGK7ofbkCt7knEGbM/\n4GwwKthDpjh2wttwDXof3fp84pOHmdnBvIHxe1zKxZTy89JWaUVQ1YQw+2Nunqs0\nPQpWCApYxdgWg05EAqudgw==\n-----END PRIVATE KEY-----\n",
+  "client_email": "allergy-compass@appspot.gserviceaccount.com",
+  "client_id": "117025530282164349948",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/allergy-compass%40appspot.gserviceaccount.com"
+}
