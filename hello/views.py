@@ -41,6 +41,16 @@ def db(request):
 @csrf_exempt
 def preferenceUpdate(request):
     print("Request body: ", request.body)
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        name = data['name']
+        doc_ref = dataBase.collection('users').document(name)
+        doc_ref.set({
+            data
+        })
+    return request
+
+
 
 @csrf_exempt
 def addUser(request):
@@ -54,6 +64,7 @@ def addUser(request):
             'name': name,
             'password': password,
         })
+    return request
 
 
 @csrf_exempt
