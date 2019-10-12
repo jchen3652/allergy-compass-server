@@ -86,6 +86,8 @@ def get_similar_products_uri(
     response = image_annotator_client.product_search(
         image, image_context=image_context)
 
+    print(response)
+
     results = response.product_search_results.results
 
     return results[0].product.name
