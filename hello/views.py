@@ -44,13 +44,6 @@ def preferenceUpdate(request):
 
 @csrf_exempt
 def addUser(request):
-    name = "fake"
-    password = "fake"
-    doc_ref = dataBase.collection(u'users').document(unicode(name))
-    doc_ref.set({
-        u'name': unicode(name),
-        u'password': unicode(password),
-    })
     print("Request body: ", request.body)
     if request.method == 'POST':
         data = json.loads(request.body)
