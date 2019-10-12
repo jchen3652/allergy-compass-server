@@ -43,11 +43,11 @@ def preferenceUpdate(request):
     print("Request body: ", request.body)
     if request.method == 'POST':
         data = json.loads(request.body)
-        name = data['name']
-        dairy = data['Dairy']
-        soy = data['Soy']
-        seafood = data['Seafood']
-        nuts = data['Nuts']
+        name = data['name'] 
+        dairy = (data['Dairy'] in ["true","True"])
+        soy = (data['Soy'] in ["true","True"])
+        seafood = (data['Seafood'] in ["true","True"])
+        nuts = (data['Nuts'] in ["true", "True"])
         doc_ref = dataBase.collection('users').document(name)
         doc_ref.set({
             'name':name,
