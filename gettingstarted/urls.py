@@ -20,6 +20,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("images", hello.views.images, name = "images"),
     path("preferenceUpdate", hello.views.preferenceUpdate, name = "preferenceUpdate"),
-    path("addUser", hello.views.addUser, name = "addUser")
+    path("addUser", hello.views.addUser, name = "addUser"),
     path("login", hello.views.login, name = "login")
 ]
