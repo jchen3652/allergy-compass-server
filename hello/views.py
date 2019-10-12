@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
-
+import base64
 from .models import Greeting
 
 # Create your views here.
@@ -31,3 +31,13 @@ def requests(request):
         # return HttpResponse("Post request recieved")
 
         return HttpResponse(request.body)
+
+@csrf_exempt
+def images(request):
+    if request.method == 'POST':
+        img_data = request.body["img"]
+        with open("static/image.png", "wb") as fh:
+            fh.write(base64.decodebytes(img_data))
+        return HttpResponse("All good")
+    elif request.method == 'GET':
+        return render(request, "imageView.html")
