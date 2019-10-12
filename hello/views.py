@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
 import base64
@@ -35,7 +36,16 @@ def images(request):
         url = data['image_url']
 
 
-        return HttpResponse(imageURLToFoodID(url))
+        # return HttpResponse(imageURLToFoodID(url))
+
+        data = {
+        'food': imageURLToFoodID(url)
+        }
+
+        return JsonResponse(data)
+
+
+
     elif request.method == 'GET':
         return render(request, "imageView.html")
 
