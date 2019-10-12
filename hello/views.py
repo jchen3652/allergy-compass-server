@@ -58,7 +58,24 @@ def preferenceUpdate(request):
 
         })
     return JsonResponse(data)
-
+@csrf_exempt
+def login(request):
+    print("Request body: ", request.body)
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        name = data['name']
+        password = data['password']
+        response = {}
+        doc_ref = dataBase.collection('users').document(name)
+        try:
+            doc = doc_ref.get()
+            if (doc.to_dict()['password']==password):
+                response["good"] = "good"
+            else:
+                response["good"] = "bad"
+        except google.cloud.exceptions.NotFound:
+            response["good"] = "no doc"
+    return JsonResponse(response)
 
 
 @csrf_exempt
