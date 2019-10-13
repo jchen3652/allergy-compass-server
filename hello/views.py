@@ -55,7 +55,7 @@ def preferenceUpdate(request):
             'Dairy':dairy,
             'Soy':soy,
             'Seafood':seafood,
-            'Nuts':nuts
+            'Nuts':nuts,
             'code':password
 
         })
