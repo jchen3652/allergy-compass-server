@@ -2,15 +2,16 @@
 import openfoodfacts
 import json
 
-searchTerm = "clam"
+while True:
+    searchTerm = input("Enter your food query: ")
 
-raw = openfoodfacts.products.search(searchTerm) # produces a json
+    raw = openfoodfacts.products.search(searchTerm) # produces a json
 
-for entry in raw["products"]:
-  #  print(entry)
-    print(entry["product_name"])
-    print(entry["code"])
-    print(entry["allergens_hierarchy"])
-    print(entry["url"])
-    print("\n")
+    for entry in raw["products"]:
+      #  print(entry)
+        print(entry["product_name"])
+        print(entry["code"])
+        print(entry["allergens_hierarchy"])
+        print(entry["url"])
+        print("\n")
     
