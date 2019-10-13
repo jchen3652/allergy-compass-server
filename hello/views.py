@@ -177,6 +177,7 @@ def addUser(request):
         data = json.loads(request.body)
         name = data['name']
         password = data['password']
+        print(password)
         doc_ref = dataBase.collection('users').document(name)
         doc_ref.set({
             'name': name,
