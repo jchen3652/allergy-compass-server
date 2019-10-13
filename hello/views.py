@@ -387,7 +387,6 @@ def getAllergyInfo(barcode):
     '''
     toReturn = ""
     raw = openfoodfacts.get_product(barcode) # produces a json
-    print("raw",raw)
     text = raw["product"]["allergens_hierarchy"]
     for categories in [["en:peanuts"], ["en:milk"], ["en:molluscs", "en:crustaceans"], ["en:soybeans"]]:
         contains = False
