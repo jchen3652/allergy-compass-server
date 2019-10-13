@@ -2,7 +2,7 @@
 import openfoodfacts
 import json
 
-searchTerm = "peanuts"
+searchTerm = "clam"
 
 raw = openfoodfacts.products.search(searchTerm) # produces a json
 

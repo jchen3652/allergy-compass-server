@@ -3,3 +3,4 @@ gunicorn
 django-heroku
 google-cloud-vision
 firebase-admin
+git+https://github.com/openfoodfacts/openfoodfacts-python

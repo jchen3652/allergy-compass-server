@@ -6,12 +6,16 @@ from django.views.decorators.csrf import csrf_exempt
 import base64
 import json
 import requests
+import openfoodfacts
+
+import openfoodfacts
 from google.cloud import vision
 from .models import Greeting
 
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
+
 
 # Use the application default credentials
 cred = credentials.ApplicationDefault()
@@ -202,8 +206,6 @@ def images(request):
 
         return JsonResponse(data)
 
-
-
     elif request.method == 'GET':
         return render(request, "imageView.html")
 
@@ -362,6 +364,28 @@ def imageURLToFoodID(url):
 
     print(response)
 
-    results = response.product_search_results.results
+    result = response.product_search_results.results[0]
+    display_name = result.product.display_name
+    barcode = result.product.name
 
-    return results[0].product.display_name
+    return results[0].product.display_name + "~" + getAllergyInfo(barcode)
+
+
+
+def getAllergyInfo(barcode):
+    '''
+    Returns 4 numbers in the order nuts, dairy, seafood, soy
+    '''
+    toReturn = ""
+    raw = openfoodfacts.get_product(barcode) # produces a json
+    text = raw["product"]["allergens_hierarchy"]
+    for categories in [["en:peanuts"], ["en:milk"], ["en:molluscs", "en:crustaceans"], ["en:soybeans"]]:
+        contains = False
+        for test in categories:
+            if(test in text):
+                contains = True
+
+        toReturn = toReturn + str(int(contains))
+
+
+    return toReturn
