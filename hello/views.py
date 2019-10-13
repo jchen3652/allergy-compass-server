@@ -91,10 +91,12 @@ def getPrefs(request):
         try:
             doc = doc_ref.get()
             dic = doc.to_dict()
-            soy = dic["Soy"]
-            seafood = dic["Seafood"]
-            nuts = dic["Nuts"]
-            dairy = dic["Dairy"]
+            response["soy"] = dic["Soy"]
+            response["seafoood"] = dic["Seafood"]
+            response["nuts"] = dic["Nuts"]
+            response["dairy"] = dic["Dairy"]
+            
+
         except google.cloud.exceptions.NotFound:
             response[""] = "no doc"
     print(response)
