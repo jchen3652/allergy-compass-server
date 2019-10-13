@@ -5,7 +5,7 @@ from firebase_admin import firestore
 # Use the application default credentials
 cred = credentials.ApplicationDefault()
 firebase_admin.initialize_app(cred, {
-  'projectId': 'allergy-compass',
+    'projectId': 'allergy-compass',
 })
 
 db = firestore.client()
@@ -14,7 +14,7 @@ doc_ref.set({
     u'first': u'Ada',
     u'last': u'Lovelace',
     u'born': 1815,
-    u'Dairy':True
+    u'Dairy': True
 })
 doc_ref = db.collection(u'users').document(u'aturing')
 doc_ref.set({
@@ -28,5 +28,3 @@ docs = users_ref.stream()
 
 for doc in docs:
     print(u'{} => {}'.format(doc.id, doc.to_dict()))
-
-

@@ -7,6 +7,7 @@ import base64
 import json
 import requests
 import openfoodfacts
+import re
 
 import openfoodfacts
 from google.cloud import vision
@@ -20,7 +21,7 @@ from firebase_admin import firestore
 # Use the application default credentials
 cred = credentials.ApplicationDefault()
 firebase_admin.initialize_app(cred, {
-  'projectId': 'allergy-compass',
+    'projectId': 'allergy-compass',
 })
 
 dataBase = firestore.client()
@@ -42,28 +43,31 @@ def db(request):
 
     return render(request, "db.html", {"greetings": greetings})
 
+
 @csrf_exempt
 def preferenceUpdate(request):
     print("Request body: ", request.body)
     if request.method == 'POST':
         data = json.loads(request.body)
         name = data['name']
-        dairy = (data['Dairy'] in ["true","True"])
-        soy = (data['Soy'] in ["true","True"])
-        seafood = (data['Seafood'] in ["true","True"])
+        dairy = (data['Dairy'] in ["true", "True"])
+        soy = (data['Soy'] in ["true", "True"])
+        seafood = (data['Seafood'] in ["true", "True"])
         nuts = (data['Nuts'] in ["true", "True"])
         password = data['password']
         doc_ref = dataBase.collection('users').document(name)
         doc_ref.set({
-            'name':name,
-            'Dairy':dairy,
-            'Soy':soy,
-            'Seafood':seafood,
-            'Nuts':nuts,
-            'code':password
+            'name': name,
+            'Dairy': dairy,
+            'Soy': soy,
+            'Seafood': seafood,
+            'Nuts': nuts,
+            'code': password
 
         })
     return JsonResponse(data)
+
+
 @csrf_exempt
 def login(request):
     print("Request body: ", request.body)
@@ -75,7 +79,7 @@ def login(request):
         doc_ref = dataBase.collection('users').document(name)
         try:
             doc = doc_ref.get()
-            if (doc.to_dict()['code']==password):
+            if (doc.to_dict()['code'] == password):
                 print("good")
                 response["good"] = "good"
             else:
@@ -102,11 +106,11 @@ def getPrefs(request):
             response["nuts"] = dic["Nuts"]
             response["dairy"] = dic["Dairy"]
 
-
         except google.cloud.exceptions.NotFound:
             response[""] = "no doc"
     print(response)
     return JsonResponse(response)
+
 
 @csrf_exempt
 def getSoy(request):
@@ -125,6 +129,7 @@ def getSoy(request):
     print(response)
     return JsonResponse(response)
 
+
 @csrf_exempt
 def getSeafood(request):
     print("Request body: ", request.body)
@@ -141,6 +146,7 @@ def getSeafood(request):
             response["seafood"] = False
     print(response)
     return JsonResponse(response)
+
 
 @csrf_exempt
 def getNuts(request):
@@ -159,6 +165,7 @@ def getNuts(request):
     print(response)
     return JsonResponse(response)
 
+
 @csrf_exempt
 def getDairy(request):
     print("Request body: ", request.body)
@@ -175,6 +182,7 @@ def getDairy(request):
             response["dairy"] = False
     print(response)
     return JsonResponse(response)
+
 
 @csrf_exempt
 def addUser(request):
@@ -194,17 +202,16 @@ def addUser(request):
 
 @csrf_exempt
 def images(request):
-    print("Request body:",request.body)
+    print("Request body:", request.body)
 
     if request.method == 'POST':
         data = json.loads(request.body)
         url = data['image_url']
 
-
         # return HttpResponse(imageURLToFoodID(url))
 
         data = {
-        'food': imageURLToFoodID(url)
+            'food': imageURLToFoodID(url)
         }
 
         return JsonResponse(data)
@@ -315,8 +322,6 @@ def get_similar_products_uri(
     return results[0].product.name
 
 
-
-
 def imageURLToFoodID(url):
     project_id = 'allergy-compass'
 
@@ -325,25 +330,20 @@ def imageURLToFoodID(url):
     product_category = 'packagedgoods-v1'
     filter = 'style=nothing'
 
-
     """Search similar products to image.
     Args:
         url
     """
 
-
     import requests
-    f = open('temp.jpg','wb')
+    f = open('temp.jpg', 'wb')
     f.write(requests.get(url).content)
     f.close()
-
-
 
     # product_search_client is needed only for its helper methods.
     product_search_client = vision.ProductSearchClient()
     image_annotator_client = vision.ImageAnnotatorClient()
 
-    #TODO: this may be incorrect for network stuff
     with open('temp.jpg', 'rb') as image_file:
         content = image_file.read()
 
@@ -368,17 +368,15 @@ def imageURLToFoodID(url):
     print(response)
 
     result = response.product_search_results.results[0]
-    display_name = result.product.display_name
-
+    display_name = re.sub(r"(\w)([A-Z])", r"\1 \2",  result.product.display_name)
 
     list = result.product.name.split("/")
     barcode = list[len(list) - 1]
 
-
     print("Barcode found: " + barcode)
 
+    print(display_name)
     return display_name + "~" + getAllergyInfo(barcode)
-
 
 
 def getAllergyInfo(barcode):
@@ -386,7 +384,7 @@ def getAllergyInfo(barcode):
     Returns 4 numbers in the order nuts, dairy, seafood, soy
     '''
     toReturn = ""
-    raw = openfoodfacts.get_product(barcode) # produces a json
+    raw = openfoodfacts.get_product(barcode)  # produces a json
     text = raw["product"]["allergens_hierarchy"]
     for categories in [["en:peanuts"], ["en:milk"], ["en:molluscs", "en:crustaceans"], ["en:soybeans"]]:
         contains = False
@@ -395,6 +393,5 @@ def getAllergyInfo(barcode):
                 contains = True
 
         toReturn = toReturn + str(int(contains))
-
 
     return toReturn
