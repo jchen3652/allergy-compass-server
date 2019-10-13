@@ -22,5 +22,9 @@ urlpatterns = [
     path("preferenceUpdate", hello.views.preferenceUpdate, name = "preferenceUpdate"),
     path("addUser", hello.views.addUser, name = "addUser"),
     path("login", hello.views.login, name = "login"),
-    path("getPrefs", hello.views.getPrefs, name="getPrefs")
+    path("getPrefs", hello.views.getPrefs, name="getPrefs"),
+    path("getSoy", hello.views.getSoy, name = "getSoy"),
+    path("getDairy", hello.views.getDairy, name = "getDairy"),
+    path("getSeafood", hello.views.getSeafood, name="getSeafood"),
+    path("getNuts",hello.views.getNuts, name = "getNuts")
 ]
