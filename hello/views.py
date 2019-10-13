@@ -371,7 +371,7 @@ def imageURLToFoodID(url):
     display_name = result.product.display_name
     barcode = result.product.name
 
-    return results[0].product.display_name + "~" + getAllergyInfo(barcode)
+    return display_name + "~" + getAllergyInfo(barcode)
 
 
 
