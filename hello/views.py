@@ -52,13 +52,15 @@ def preferenceUpdate(request):
         soy = (data['Soy'] in ["true","True"])
         seafood = (data['Seafood'] in ["true","True"])
         nuts = (data['Nuts'] in ["true", "True"])
+        password = data['password']
         doc_ref = dataBase.collection('users').document(name)
         doc_ref.set({
             'name':name,
             'Dairy':dairy,
             'Soy':soy,
             'Seafood':seafood,
-            'Nuts':nuts
+            'Nuts':nuts,
+            'code':password
 
         })
     return JsonResponse(data)
@@ -181,6 +183,7 @@ def addUser(request):
         data = json.loads(request.body)
         name = data['name']
         password = data['password']
+        print(password)
         doc_ref = dataBase.collection('users').document(name)
         doc_ref.set({
             'name': name,
