@@ -43,7 +43,7 @@ def preferenceUpdate(request):
     print("Request body: ", request.body)
     if request.method == 'POST':
         data = json.loads(request.body)
-        name = data['name'] 
+        name = data['name']
         dairy = (data['Dairy'] in ["true","True"])
         soy = (data['Soy'] in ["true","True"])
         seafood = (data['Seafood'] in ["true","True"])
@@ -95,7 +95,7 @@ def getPrefs(request):
             response["seafoood"] = dic["Seafood"]
             response["nuts"] = dic["Nuts"]
             response["dairy"] = dic["Dairy"]
-            
+
 
         except google.cloud.exceptions.NotFound:
             response[""] = "no doc"
@@ -364,4 +364,4 @@ def imageURLToFoodID(url):
 
     results = response.product_search_results.results
 
-    return results[0].product.name
+    return results[0].product.display_name
