@@ -4,6 +4,7 @@ import openfoodfacts
 def getAllergyInfo(barcode):
     toReturn = ""
     raw = openfoodfacts.get_product(barcode) # produces a json
+    print(raw)
     text = raw["product"]["allergens_hierarchy"]
     for categories in [["en:peanuts"], ["en:milk"], ["en:molluscs", "en:crustaceans"], ["en:soybeans"]]:
         contains = False
@@ -16,7 +17,7 @@ def getAllergyInfo(barcode):
         
     return toReturn
         
-print(getAllergyInfo("0060410066317"))
+print(getAllergyInfo("20150624"))
     
 
 

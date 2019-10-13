@@ -369,7 +369,13 @@ def imageURLToFoodID(url):
 
     result = response.product_search_results.results[0]
     display_name = result.product.display_name
-    barcode = result.product.name
+
+
+    list = result.product.name.split("/")
+    barcode = list[len(list) - 1]
+
+
+    print("Barcode found: " + barcode)
 
     return display_name + "~" + getAllergyInfo(barcode)
 
@@ -381,6 +387,7 @@ def getAllergyInfo(barcode):
     '''
     toReturn = ""
     raw = openfoodfacts.get_product(barcode) # produces a json
+    print("raw",raw)
     text = raw["product"]["allergens_hierarchy"]
     for categories in [["en:peanuts"], ["en:milk"], ["en:molluscs", "en:crustaceans"], ["en:soybeans"]]:
         contains = False
