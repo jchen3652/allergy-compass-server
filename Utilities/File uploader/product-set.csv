@@ -1,4 +1,7 @@
-gs://allergy-compass.appspot.com/Cheez-its/91BRxW5lDEL._SL1500_.jpg,image0,product_set0,cheez_its,packagedgoods-v1,,style=nothing,
-gs://allergy-compass.appspot.com/Cheez-its/images.jfif,image1,product_set0,cheez_its,packagedgoods-v1,,style=nothing,
-gs://allergy-compass.appspot.com/barbecue lays/0028400183830_CF_default_default_large.jpeg,image2,product_set0,lays_baked_barbecue,packagedgoods-v1,,style=nothing,
-gs://allergy-compass.appspot.com/barbecue lays/c3ceae27-5784-4b89-8b04-77feb7f729a4_1.356451b082a4ff14224f48a776836dd2.jpeg,image3,product_set0,lays_baked_barbecue,packagedgoods-v1,,style=nothing,
+gs://allergy-compass.appspot.com/Cheez-its/91BRxW5lDEL._SL1500_.jpg,image0,product_set0,0024100940141,packagedgoods-v1,Cheez It Original,style=nothing,
+gs://allergy-compass.appspot.com/Cheez-its/images.jfif,image1,product_set0,0024100940141,packagedgoods-v1,Cheez It Original,style=nothing,
+
+gs://allergy-compass.appspot.com/barbecue lays/0028400183830_CF_default_default_large.jpeg,image2,product_set0,0060410066317,packagedgoods-v1,Lay's Baked Barbecue Chips,style=nothing,
+gs://allergy-compass.appspot.com/barbecue lays/c3ceae27-5784-4b89-8b04-77feb7f729a4_1.356451b082a4ff14224f48a776836dd2.jpeg,image3,product_set0,0060410066317,packagedgoods-v1,Lay's Baked Barbecue Chips,style=nothing,
+
+
