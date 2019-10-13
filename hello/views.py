@@ -81,6 +81,26 @@ def login(request):
 
 
 @csrf_exempt
+def getPrefs(request):
+    print("Request body: ", request.body)
+    if request.method == 'GET':
+        data = json.loads(request.body)
+        name = data['name']
+        response = {}
+        doc_ref = dataBase.collection('users').document(name)
+        try:
+            doc = doc_ref.get()
+            dic = doc.to_dict()
+            soy = dic["Soy"]
+            seafood = dic["Seafood"]
+            nuts = dic["Nuts"]
+            dairy = dic["Dairy"]
+        except google.cloud.exceptions.NotFound:
+            response[""] = "no doc"
+    print(response)
+    return JsonResponse(response)
+
+@csrf_exempt
 def addUser(request):
     print("Request body: ", request.body)
     if request.method == 'POST':
