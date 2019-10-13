@@ -105,7 +105,7 @@ def getPrefs(request):
 @csrf_exempt
 def getSoy(request):
     print("Request body: ", request.body)
-    if request.method == 'GET':
+    if request.method == 'POST':
         data = json.loads(request.body)
         name = data['name']
         response = {}
@@ -122,7 +122,7 @@ def getSoy(request):
 @csrf_exempt
 def getSeafood(request):
     print("Request body: ", request.body)
-    if request.method == 'GET':
+    if request.method == 'POST':
         data = json.loads(request.body)
         name = data['name']
         response = {}
@@ -139,7 +139,7 @@ def getSeafood(request):
 @csrf_exempt
 def getNuts(request):
     print("Request body: ", request.body)
-    if request.method == 'GET':
+    if request.method == 'POST':
         data = json.loads(request.body)
         name = data['name']
         response = {}
@@ -156,7 +156,7 @@ def getNuts(request):
 @csrf_exempt
 def getDairy(request):
     print("Request body: ", request.body)
-    if request.method == 'GET':
+    if request.method == 'POST':
         data = json.loads(request.body)
         name = data['name']
         response = {}
