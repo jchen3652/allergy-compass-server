@@ -48,6 +48,7 @@ def preferenceUpdate(request):
         soy = (data['Soy'] in ["true","True"])
         seafood = (data['Seafood'] in ["true","True"])
         nuts = (data['Nuts'] in ["true", "True"])
+        password = data['password']
         doc_ref = dataBase.collection('users').document(name)
         doc_ref.set({
             'name':name,
@@ -55,6 +56,7 @@ def preferenceUpdate(request):
             'Soy':soy,
             'Seafood':seafood,
             'Nuts':nuts
+            'code':password
 
         })
     return JsonResponse(data)
