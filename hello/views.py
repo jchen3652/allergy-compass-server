@@ -103,6 +103,74 @@ def getPrefs(request):
     return JsonResponse(response)
 
 @csrf_exempt
+def getSoy(request):
+    print("Request body: ", request.body)
+    if request.method == 'GET':
+        data = json.loads(request.body)
+        name = data['name']
+        response = {}
+        doc_ref = dataBase.collection('users').document(name)
+        try:
+            doc = doc_ref.get()
+            dic = doc.to_dict()
+            response["soy"] = dic["Soy"]
+        except google.cloud.exceptions.NotFound:
+            response["soy"] = False
+    print(response)
+    return JsonResponse(response)
+
+@csrf_exempt
+def getSeafood(request):
+    print("Request body: ", request.body)
+    if request.method == 'GET':
+        data = json.loads(request.body)
+        name = data['name']
+        response = {}
+        doc_ref = dataBase.collection('users').document(name)
+        try:
+            doc = doc_ref.get()
+            dic = doc.to_dict()
+            response["seafood"] = dic["Seafood"]
+        except google.cloud.exceptions.NotFound:
+            response["seafood"] = False
+    print(response)
+    return JsonResponse(response)
+
+@csrf_exempt
+def getNuts(request):
+    print("Request body: ", request.body)
+    if request.method == 'GET':
+        data = json.loads(request.body)
+        name = data['name']
+        response = {}
+        doc_ref = dataBase.collection('users').document(name)
+        try:
+            doc = doc_ref.get()
+            dic = doc.to_dict()
+            response["nuts"] = dic["Nuts"]
+        except google.cloud.exceptions.NotFound:
+            response["nuts"] = False
+    print(response)
+    return JsonResponse(response)
+
+@csrf_exempt
+def getDairy(request):
+    print("Request body: ", request.body)
+    if request.method == 'GET':
+        data = json.loads(request.body)
+        name = data['name']
+        response = {}
+        doc_ref = dataBase.collection('users').document(name)
+        try:
+            doc = doc_ref.get()
+            dic = doc.to_dict()
+            response["dairy"] = dic["Dairy"]
+        except google.cloud.exceptions.NotFound:
+            response["dairy"] = False
+    print(response)
+    return JsonResponse(response)
+
+@csrf_exempt
 def addUser(request):
     print("Request body: ", request.body)
     if request.method == 'POST':
