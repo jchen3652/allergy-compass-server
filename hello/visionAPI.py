@@ -228,7 +228,7 @@ def imageURLToFoodID(url):
 
     results = response.product_search_results.results
 
-    return results[0].product.name
+    return results[0].product.display_name
 
 
 print(get_similar_products_file("allergy-compass", "us-east1", "product_set0", "packagedgoods-v1", "D:/Users/James/Desktop/20191012_045742.jpg", "style=nothing"))

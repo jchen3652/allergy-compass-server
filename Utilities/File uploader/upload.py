@@ -1,3 +1,5 @@
+from google.cloud import vision
+
 def import_product_sets(project_id, location, gcs_uri):
     """Import images of different products in the product set.
     Args:
@@ -38,4 +40,4 @@ def import_product_sets(project_id, location, gcs_uri):
         else:
             print('Status code not OK: {}'.format(status.message))
 
-import_product_sets("allergy-compass", "usa-east1", "gs://allergy-compass.appspot.com/product-set.csv")
+import_product_sets("allergy-compass", "us-east1", "gs://allergy-compass.appspot.com/product-set.csv")

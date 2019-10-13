@@ -2,7 +2,7 @@
 import openfoodfacts
 import json
 
-searchTerm = "Kirkland Apple Sauce"
+searchTerm = "peanuts"
 
 raw = openfoodfacts.products.search(searchTerm) # produces a json
 
